@@ -54,3 +54,7 @@ Create notification.xml:
   </interface>
 </node>
 ```
+
+## Output
+
+![alt text](image-1.png)
