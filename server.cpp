@@ -11,8 +11,12 @@ void handle_message(DBusMessage* msg, DBusConnection* conn) {
         const char* message;
         dbus_message_iter_get_basic(&args, &message);
 
-        time_t now = time(0);
-        std::cout << "[LOG " << ctime(&now) << "] " << message << std::endl;
+
+        std::time_t now = std::time(nullptr);
+        std::tm* timeinfo = std::localtime(&now);
+        char bufferTime[64];
+        std::strftime(bufferTime, sizeof(bufferTime), "%c", timeinfo);
+        std::cout << "[LOG " << bufferTime << "] " << message << std::endl;
 
         DBusMessage* reply = dbus_message_new_method_return(msg);
         dbus_connection_send(conn, reply, NULL);
